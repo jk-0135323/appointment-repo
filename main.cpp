@@ -1,104 +1,77 @@
 #include <iostream>
 #include <string>
-#include "date.h"
+
 #include "functionHeader.h"
 #include <chrono>
 
 using namespace std;
 
 int operation, index;
-bool identity;
+int identity;
 
-
-struct appointment {
-    //date::year_month_day date;
-    string date;
-    string time;
-    string name;
-    date::weekday day;
-    bool status;
-};
-
-
-struct lecturer {
-    string name;
-    int id;
-    string password;
-    appointment* appointmentList[5];
-    lecturer* next;
-};
-
-struct student {
-    string name;
-    int id;
-    string password;
-    appointment record[1];
-    student* next;
-};
-
+lecturer lectArr[3] = {{"Ms bridget"}, {"Mr Khoo"}, {"Ms.Hema"}};
+student *studentHead = new student{"james", 0, 1};
 
 lecturer currentLect;
+student *currentStudent = studentHead;
 
-lecturer lectArr [1] = {"bridget", 133457,"lect123" };
-student* studentHead = new student{"james", 12345, "password"};
-student* currentStudent = studentHead;
+int main()
+{
+    while (true)
+    {
 
+        identity = chooseIdentity(); // identify lecturer or student
 
-
-int main(){
-
-
-while(true){
-    identity= chooseIdentity();
-    if (identity == 1){
-        index = lectLogin();
-        if (index == 10){
-            cout<<"wrong id or password"<<endl;
-            continue;
-        }else{
+        switch (identity)
+        {
+        case 1:
+            index = chooseLecturer(lectArr); // identify which lecturer
             currentLect = lectArr[index];
-        }
-            
-        
+            operation = showMenu(); // identify operation, make or cancel or view appointment
+            switch (operation)
+            {
+            case 1:
+                cout << "lecturer chose to make appointment";
+                addAppointment(currentLect);
+                break;
+            case 2:
+                cout << "lecturer chose to cancel appointment";
+                lecturerCancel(currentLect, studentHead);
+                break;
+            case 3:
+                cout << "lecturer chose to view";
+                lecturerView(currentLect);
+                break;
+            default:
+                cout << "Invalid choice";
+            }
+            break;
+        case 2:
+            chooseStudent(studentHead, currentStudent); // identify which student
+            operation = showMenu();                     // identify operation, make or cancel or view appointment
+            switch (operation)
+            {
+            case 1:
+                cout << "student chose to make appointment";
+                bookAppointment(currentStudent, lectArr);
+                break;
+            case 2:
+                cout << "student chose to cancel appointment";
+                studentCancel(currentStudent, lectArr);
+                break;
+            case 3:
+                cout << "student chose view appointment";
+                studentView(currentStudent);
+                break;
+            default:
+                cout << "Invalid choice";
+            }
+            break;
 
+            break;
+        default:
+
+            break;
+        }
     }
-    else if(identity == 2){
-        int temp;
-        temp = studentLogin();
-        if (temp == 10){
-            cout<<"wrong id or password"<<endl;
-            continue;
-        }
-    }
-
-}
-
-
-if (identity){
-    
-    operation = showLecturerMenu();
-    switch (operation) {
-    case 1:
-        cout << "You chose to make appointment(s)";
-        makeAppointment();
-        break;
-    case 2:
-        cout << "You chose to cancel an appointment";
-        lecturerCancelAppointment();
-        break;
-    case 3:
-        cout << "You chose view appointment(s)";
-        break;
-    default:
-        cout << "Invalid choice";
-        }
-    }else{
-    operation = showStudentMenu();
-}
-
-
-
-
-
-
 }

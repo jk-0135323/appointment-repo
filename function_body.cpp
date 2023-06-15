@@ -1,99 +1,61 @@
 #include <iostream>
 using namespace std;
+#include "functionHeader.h"
 
-
-int chooseIdentity(){
-    cout<<" 1 for lect, 2 for student and validate input"<<endl;
-    int role;
-    cin>>role;
-    return role;
-}
-
-/*bool login(lectArr lecturerArray, student* studentList) {
-    cout<<"get role, input id, password"<<endl<<
-    "if lecturer, return true, else return false"
-    string username, password;
-    int role, id;
-
-    while (true) {
-        cout << "Enter role (1 for lecturer, 2 for student): ";
-        cin >> role;
-
-        if (role == 1 || role == 2) {
-            break;
-        }
-
-        cout << "Invalid role. Please enter 1 for lecturer or 2 for student." << endl;
-    }
-
-    while (true) {
-        cout << "Enter id: ";
-        cin >> id;
-
-        if (id > 0) {
-            break;
-        }
-
-        cout << "Invalid id. Please enter a positive integer." << endl;
-    }
-
-    cout << "Enter password: ";
-    cin >> password;
-
-    if (role == 1) {
-        for (int i = 0; i < 1; ++i) {
-            if (lecturerArray[i].id == id && lecturerArray[i].password == password) {
-                cout << "Welcome, " << lecturerArray[i].name << endl;
-                return true;
-            }
-        }
-    } else if (role == 2) {
-        StudentNode* navigator = studentList;
-        while (navigator != NULL) {
-            if (navigator->id == id && navigator->password == password) {
-                cout << "Welcome, " << navigator->name << endl;
-                return false;
-            }
-            navigator = navigator->next;
-        }
-    }
-
-    return false;*/
-
-
-int showLecturerMenu(){
-    cout<<"show menu, 1 for make appointment, 2 for cancel, 3 for view"<< endl;
-    return 8;
-}
-
-void makeAppointment(){
-    cout<<"input year, month, day, time"<<endl<<
-    "check the day, add to linked list of the day, by comparing date and tim"<<endl;
-
-}
-
-int lectLogin(){
-    cout<<"get id, get password, if match, return the index of lectArray"<<endl
-    <<"else return 10"<<endl;
-    return 1;
-}
-
-int studentLogin(){
-    cout<<"current student act as navigator, using while loop, if got match, return 1"<<endl
-    <<"else, move current student back to head, and return 10"<<endl;
-    return 1;
+int chooseIdentity()
+{
+    cout << " 1 for lect, 2 for student and validate input" << endl;
     
 }
 
-void lecturerCancelAppointment(){
-    cout << "Prompt the lecturer to choose a day to view the appointments they made." << endl
-     << "Prompt the lecturer to choose an appointment from the chosen day to cancel." << endl
-     << "Based on the chosen appointment, check if it has been booked by a student." << endl
-     << "If appointment is booked, change status of the appointment to 'Cancelled' in  student's record array and delete the appointment from lecturer." << endl;
+int showMenu()
+{
+    cout << "show menu, 1 for make appointment, 2 for cancel, 3 for view" << endl;
+    
 }
 
-int showStudentMenu(){
-    cout << "display operations for student such as book appointment, cancel appointment and view personal record" <<endl;
+int chooseLecturer(lecturer *arr)
+{
+    cout << "display list of lecturer(1-3) and return the chosen one ";
+}
 
-return 9;
+void chooseStudent(student *head, student *navigator)
+{
+    cout << "move the navigator to the selected student" << endl;
+}
+
+void addAppointment(lecturer lect)
+{
+    cout << "start a while loop, input year, month, day, time" << endl
+         << "check the day, add to linked list of the day, by comparing date and time, break loop if wish to stop making" << endl;
+}
+
+void lecturerCancel(lecturer lect)
+{
+    cout << "Prompt the lecturer to choose a day to view the appointments they made." << endl
+         << "Prompt the lecturer to choose an appointment from the chosen day to cancel." << endl
+         << "Based on the chosen appointment, check if it has been booked by a student." << endl
+         << "If appointment is booked, change status of the appointment to 'Cancelled' in  student's record array and delete the appointment from lecturer." << endl;
+}
+
+void lecturerView(lecturer lect)
+{
+    cout << "choose a day, (mon to fri), then loop through linked list of the day";
+}
+
+void bookAppointment(student *student, lecturer *arr)
+{
+    cout << "select lecturer, choose day(mon-fri), update student name into lecturer linked list, make a copy in students array" << endl
+         << "sort the array base on date and time" << endl;
+}
+
+void studentCancel(student *student, lecturer *arr)
+{
+    cout << "loop through student array, identify date, time and name of lecturer" << endl
+         << "on the student side,change status into cancelled, on lecturer side, change status into available" << endl;
+}
+
+void studentView(student* student)
+{
+    cout << "loop to display all appointment" << endl;
 }
