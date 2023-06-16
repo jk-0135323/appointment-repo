@@ -4,8 +4,8 @@
 
 using namespace std;
 
-int operation, index, identity;
-char logout, changeIdentity;
+int operation, i ,identity = 0;
+char logout, changeIdentity = 'y';
 
 lecturer lectArr[3] = {{"Ms bridget"}, {"Mr Khoo"}, {"Ms.Hema"}};
 student *studentHead = new student{"james", 0, 1};
@@ -26,8 +26,8 @@ int main()
         switch (identity)
         {
         case 1:
-            index = chooseLecturer(lectArr); // identify which lecturer
-            currentLect = lectArr[index];
+            i = chooseLecturer(lectArr); // identify which lecturer
+            currentLect = lectArr[i];
             while (logout == 'y' || logout == 'Y')
             {
                 operation = showMenu(); // identify operation, make or cancel or view appointment

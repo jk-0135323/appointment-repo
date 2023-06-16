@@ -7,19 +7,49 @@ using namespace std;
 
 int chooseIdentity()
 {
-    cout << " 1 for lect, 2 for student and validate input" << endl;
-    
+    int i;
+    cout <<"1. Lecturer"<<endl<<"2. Student"<<endl;
+    try
+    {
+        cin>>i;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    return i;
 }
 
 int showMenu()
 {
-    cout << "show menu, 1 for make appointment, 2 for cancel, 3 for view" << endl;
+    int i;
+    cout <<"Select Operation/n 1. Add Appointment slot/n 2.Cancel Appointment/n 3.View Appointment"<<endl;
+    try
+    {
+        cin>>i;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    return i;
     
 }
 
 int chooseLecturer(lecturer *arr)
 {
-    cout << "display list of lecturer(1-3) and return the chosen one ";
+    int i;
+    cout <<"Select identity \n1. Ms Bridget \n2. Mr.Khoo\n3. Ms.Hema"<<endl;;
+    try
+    {
+        cin>>i;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    return i;
+    
 }
 
 void chooseStudent(student *head, student *navigator)
@@ -33,7 +63,7 @@ void addAppointment(lecturer lect)
          << "check the day, add to linked list of the day, by comparing date and time, break loop if wish to stop making" << endl;
 }
 
-void lecturerCancel(lecturer lect)
+void lecturerCancel(lecturer lect, student *student)
 {
     cout << "Prompt the lecturer to choose a day to view the appointments they made." << endl
          << "Prompt the lecturer to choose an appointment from the chosen day to cancel." << endl
