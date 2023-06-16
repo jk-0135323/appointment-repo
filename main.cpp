@@ -1,8 +1,54 @@
 #include <iostream>
 #include <string>
-#include "functionHeader.h"
+#include "date.h"
+#include <chrono>
+#include <ctime>
 
 using namespace std;
+
+struct appointment
+{
+    date::year_month_day ymd;
+    time_t time;
+    string name;
+    string status;
+};
+
+struct appointmentNode
+{
+    appointment app;
+    appointment *next;
+};
+
+struct lecturer
+{
+    string name;
+    appointment *appointmentList[5];
+};
+
+struct student
+{
+    string name;
+    int n;// # of appointment
+    int size; //#size of array
+    appointment record[1];
+    student *next;
+};
+
+int chooseIdentity();
+
+int chooseLecturer(lecturer *arr);
+void chooseStudent(student *head, student *navigator);
+
+int showMenu();
+
+void addAppointment(lecturer lect);
+void lecturerCancel(lecturer lect, student *student);
+void lecturerView(lecturer lect);
+
+void bookAppointment(student *student, lecturer *arr);
+void studentCancel(student *student, lecturer *arr);
+void studentView(student* student);
 
 int operation, i ,identity = 0;
 char logout, changeIdentity = 'y';
@@ -86,4 +132,93 @@ int main()
             break;
         }
     }
+}
+
+
+int chooseIdentity()
+{
+    int i;
+    cout <<"1. Lecturer"<<endl<<"2. Student"<<endl;
+    try
+    {
+        cin>>i;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    return i;
+}
+
+int showMenu()
+{
+    int i;
+    cout <<"Select Operation/n 1. Add Appointment slot/n 2.Cancel Appointment/n 3.View Appointment"<<endl;
+    try
+    {
+        cin>>i;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    return i;
+    
+}
+
+int chooseLecturer(lecturer *arr)
+{
+    int i;
+    cout <<"Select identity \n1. Ms Bridget \n2. Mr.Khoo\n3. Ms.Hema"<<endl;;
+    try
+    {
+        cin>>i;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    return i;
+    
+}
+
+void chooseStudent(student *head, student *navigator)
+{
+    cout << "move the navigator to the selected student" << endl;
+}
+
+void addAppointment(lecturer lect)
+{
+    cout << "start a while loop, input year, month, day, time" << endl
+         << "check the day, add to linked list of the day, by comparing date and time, break loop if wish to stop making" << endl;
+}
+
+void lecturerCancel(lecturer lect, student *student)
+{
+    cout << "Prompt the lecturer to choose a day to view the appointments they made." << endl
+         << "Prompt the lecturer to choose an appointment from the chosen day to cancel." << endl
+         << "Based on the chosen appointment, check if it has been booked by a student." << endl
+         << "If appointment is booked, change status of the appointment to 'Cancelled' in  student's record array and delete the appointment from lecturer." << endl;
+}
+
+void lecturerView(lecturer lect)
+{
+    cout << "choose a day, (mon to fri), then loop through linked list of the day";
+}
+
+void bookAppointment(student *student, lecturer *arr)
+{
+    cout << "select lecturer, choose day(mon-fri), update student name into lecturer linked list, make a copy in students array" << endl
+         << "sort the array base on date and time" << endl;
+}
+
+void studentCancel(student *student, lecturer *arr)
+{
+    cout << "loop through student array, identify date, time and name of lecturer" << endl
+         << "on the student side,change status into cancelled, on lecturer side, change status into available" << endl;
+}
+
+void studentView(student* student)
+{
+    cout << "loop to display all appointment" << endl;
 }
