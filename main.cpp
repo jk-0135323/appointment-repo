@@ -1,13 +1,11 @@
 #include <iostream>
 #include <string>
-
 #include "functionHeader.h"
-#include <chrono>
 
 using namespace std;
 
-int operation, index;
-int identity;
+int operation, index, identity;
+char logout, changeIdentity;
 
 lecturer lectArr[3] = {{"Ms bridget"}, {"Mr Khoo"}, {"Ms.Hema"}};
 student *studentHead = new student{"james", 0, 1};
@@ -17,6 +15,9 @@ student *currentStudent = studentHead;
 
 int main()
 {
+    studentHead->next = new student{"Balpreet", 0, 1};
+    studentHead->next->next = new student{"Daniel", 0, 1};
+
     while (true)
     {
 
@@ -27,50 +28,61 @@ int main()
         case 1:
             index = chooseLecturer(lectArr); // identify which lecturer
             currentLect = lectArr[index];
-            operation = showMenu(); // identify operation, make or cancel or view appointment
-            switch (operation)
+            while (logout == 'y' || logout == 'Y')
             {
-            case 1:
-                cout << "lecturer chose to make appointment";
-                addAppointment(currentLect);
+                operation = showMenu(); // identify operation, make or cancel or view appointment
+                switch (operation)
+                {
+                case 1:
+                    cout << "lecturer chose to make appointment";
+                    addAppointment(currentLect);
+                    break;
+                case 2:
+                    cout << "lecturer chose to cancel appointment";
+                    lecturerCancel(currentLect, studentHead);
+                    break;
+                case 3:
+                    cout << "lecturer chose to view";
+                    lecturerView(currentLect);
+                    break;
+                default:
+                    cout << "Invalid operation";
+                }
                 break;
-            case 2:
-                cout << "lecturer chose to cancel appointment";
-                lecturerCancel(currentLect, studentHead);
-                break;
-            case 3:
-                cout << "lecturer chose to view";
-                lecturerView(currentLect);
-                break;
-            default:
-                cout << "Invalid choice";
+                cout << "continue as " << currentLect.name << "? (y/n)" << endl;
+                cin >> logout;
             }
             break;
         case 2:
+            logout = 'y';
             chooseStudent(studentHead, currentStudent); // identify which student
-            operation = showMenu();                     // identify operation, make or cancel or view appointment
-            switch (operation)
+            while (logout == 'y' || logout == 'Y')
             {
-            case 1:
-                cout << "student chose to make appointment";
-                bookAppointment(currentStudent, lectArr);
+                operation = showMenu(); // identify operation, make or cancel or view appointment
+                switch (operation)
+                {
+                case 1:
+                    cout << "student chose to make appointment";
+                    bookAppointment(currentStudent, lectArr);
+                    break;
+                case 2:
+                    cout << "student chose to cancel appointment";
+                    studentCancel(currentStudent, lectArr);
+                    break;
+                case 3:
+                    cout << "student chose view appointment";
+                    studentView(currentStudent);
+                    break;
+                default:
+                    cout << "Invalid operation";
+                }
                 break;
-            case 2:
-                cout << "student chose to cancel appointment";
-                studentCancel(currentStudent, lectArr);
-                break;
-            case 3:
-                cout << "student chose view appointment";
-                studentView(currentStudent);
-                break;
-            default:
-                cout << "Invalid choice";
+                cout << "continue as " << currentStudent->name << "? (y/n)" << endl;
+                cin >> logout;
             }
             break;
-
-            break;
         default:
-
+            cout << "invalid identity" << endl;
             break;
         }
     }

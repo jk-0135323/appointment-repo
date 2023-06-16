@@ -1,11 +1,13 @@
 #include <string>
 #include "date.h"
+#include <chrono>
+#include <ctime>
 using namespace std;
 
 struct appointment
 {
     date::year_month_day ymd;
-    string time;
+    time_t time;
     string name;
     string status;
 };
@@ -25,13 +27,11 @@ struct lecturer
 struct student
 {
     string name;
-    int n;
-    int size;
+    int n;// # of appointment
+    int size; //#size of array
     appointment record[1];
     student *next;
 };
-
-
 
 
 
